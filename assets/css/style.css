@@ -10,6 +10,8 @@
 /* font-family: 'Tangerine', cursive; */
 @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap');
 
+/* Roboto */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 
 /* Regular Utilities */
 *, * ::after, * ::before {
@@ -179,9 +181,77 @@ img {
 
 .dishes .card:hover { transform: translateY(-10px);}
 
-
 /* ------------------ Menu Page CSS ----------------- */
+.menu .container {
+    padding: 0 ;
+}
 
+.menu-item {
+    display: flex;
+    max-width: 500px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+
+.menu-item .flex { align-items: center; }
+
+.menu-item .item-info { padding: 15px;}
+
+.menu-item figure i {margin-right: 5px;}
+
+.menu-item .item-category { color: #5B6EFD;}
+
+.menu-cart-functionality {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+ .cart-btn-container {
+     display: flex;
+    padding: 5px;
+    background-color: #F5F5F5;
+}
+
+
+.menu-item .price {
+    color: #F57C00;
+    font-size: 25px;
+    font-weight: 700;
+    font-family: 'roboto', sans-serif;
+}
+
+.cart-btn-container i {
+    padding: 5px;
+}
+
+.cart-btn-container button {
+    background: #ffffff;
+    border: none;
+    color: #666262;
+    font-size: 18px;
+    margin: 0 10px;
+    transition: all ease-in 0.2s;
+}
+
+.cart-btn-container button:focus  {
+    outline: none;
+}
+
+.cart-btn-container button:hover {
+    background-color: #6c757d;
+    color: #ffffff;
+} 
+
+.menu-item img {
+    max-width: 220px;
+    height: 240px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
 
 
 /* ----------------- Our Vision CSS ------------------ */
@@ -226,70 +296,11 @@ img {
     font-size: 18px;
 }
 
-
-/* ------------------- Testomonial CSS ------------------ */
-
-/* Customizing All stuff acc. to page */
-.testimonial-page nav, .testimonial-page li, .testimonial-page a { 
-    z-index: 10;
-    color: #fff;
-}
-
-.testimonial-footer { margin-top: 16em; }
-
-/* Backgraound Video */
-.testimonial-video video {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 70em;
-    object-fit: cover;
-    opacity: 0.95;
-}
-
-/* Testimonial Articles */
-.testimonial-page .btn { border-color: #fff; }
-
-.testimonial-page .btn:hover { 
-    background-color: rgba(255, 255, 255, 0.932);
-    color: #333; 
-}
-
-.testimonial-video .dishes {
-    position: relative;
-    margin-top: 5em;
-}
-
-.testimonial-video .dishes h1 { 
-    color: #fff; 
-    font-family: 'Dancing Script', cursive;
-}
-
-.testimonial-video .dishes .card { 
-    z-index: 10;
-    width: 340px;
-    height: 520px;
-    transition: transform 0.8s ease-in;
-    background-color: rgba(51, 51, 51, 0.644);
-    color: #fff;
-    opacity: 0.9;
-}
-
-.testimonial-video .dishes .card:hover { transform: translateY(-10px); }
-
-.testimonial-video i {
-    color: #fff;
-    margin: 0 13px;
-}
-
-.testimonial-video i:hover { color: rgb(129, 129, 129)}
-
 /* ------------------------------- Footer --------------------------------*/
 footer {
     background-color: #171819;
     color: #fff;
-    padding: 80px 50px;
+    padding: 80px 0;
 }
 
 footer li, footer p, footer i, footer a {
