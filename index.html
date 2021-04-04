@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/utilities.css">
     <link rel="stylesheet" href="assets/css/mobile.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
 </head>
 <body>
 
@@ -18,27 +19,49 @@
     <header class="navbar">
         <div class="container flex text-center jc-ai-center">
             <!-- Left Navigation -->
-            <nav class="left-nav flex align-item-center">
-                <a href="index.html"><h1><span class="clr-red">Mit</span> <span class="clr-green">Canteen</span></h1></a>
+            <div class="site-title flex align-item-center">
+                <div>
+                    <a href="index.html"><h1><span class="clr-red">Mit</span> <span class="clr-green">Canteen</span></h1></a>
+                </div>
+                <!-- Toggle Bars -->
+                <div class="toggle-bars mybar">
+                    <div class="bars bar-1"></div>
+                    <div class="bars bar-2"></div>
+                    <div class="bars bar-3"></div>
+                </div>
+            </div>
+            <!-- Right Navigation -->
+            <nav class="site-nav flex left-nav align-item-center">                
                 <ul class="flex">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="menu.html">Menu</a></li>
                     <li><a href="our-vision.html">Our Vision</a></li>
-                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <button href="#" class="btn">Log In</button>
+                    <button href="#" class="btn">Sign Up</button>
+                    <!-- Cart Icon -->
+                    <a href="#" class="flex"><img src="assets/images/cart.svg" alt="cart icon"><p>6</p></a>
                 </ul>
-            </nav>
-            <!-- Right Navigation -->
-            <nav class="right-nav flex align-item-center">
-                <a href="#" class="btn">Log In</a>
-                <a href="#" class="btn">Sign Up</a>
-                <!-- Cart Icon -->
-                <a href="#" class="flex"><img src="assets/images/cart.svg" alt="cart icon"><p>6</p></a>
             </nav>
         </div>
     </header>
 
-    <section class="main-img">
-        <img src="assets/images/footer-illustration.webp" alt="">
+    <!-- Mobile Navbar -->
+    <header class="mob-navbar">
+        <nav class="nav container">
+            <ul class="mob-ul">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="our-vision.html">Our Vision</a></li>
+                <button href="#" class="btn">Log In</button>
+                <button href="#" class="btn">Sign Up</button>
+                <!-- Cart Icon -->
+                <a href="#" class="flex"><img src="assets/images/cart.svg" alt="cart icon"><p>6</p></a>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="main-img prakat-ho-animation">
+        <img src="assets/images/footer-illustration.webp" alt="Home Page Image">
     </section>
 
     <!-- Hero Section -->
@@ -213,5 +236,8 @@
         </section>
     </footer>
     
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/main.js"></script>
+
 </body>
 </html>

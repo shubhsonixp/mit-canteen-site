@@ -64,14 +64,16 @@ img {
 /* Navbar */
 .navbar h1 { font-size: 25px; }
 
-.navbar .container { justify-content: space-around; }
+.navbar .container { 
+    justify-content: space-around;
+    align-items: center;
+}
+
+.site-nav { 
+    justify-content: space-between;
+}
 
 .btn { transition: 0.35s; }
-
-.navbar .btn:hover {
-    background: #000;
-    color: #fff;
-}
 
 .navbar ul, .navbar li { 
     font-size: 18px;
@@ -81,20 +83,109 @@ img {
 
 .navbar .left-nav a:hover { color: rgb(214, 52, 52); }
 
-/* Right Nav Cart */
-.right-nav img {
+.navbar button {
+    outline: none;
+    background-color: #FAF9F6;
+    padding: 0px 25px;
+}
+
+.navbar .btn:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* Toggle Bars */
+.toggle-bars {
+    display: none;
+    cursor: pointer;
+}
+
+.toggle-bars .bars{
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar-1 {
+    -webkit-transform: rotate(-45deg) translate(-5px, 6px);
+    transform: rotate(-45deg) translate(-6px, 6px);
+}
+.change .bar-2 {
+    opacity: 0;
+}
+.change .bar-3 {
+    -webkit-transform: rotate(45deg) translate(-6px, -8px);
+    transform: rotate(45deg) translate(-6px, -8px);
+}
+
+/* left Nav Cart */
+.left-nav img {
     width: 40px;
     height: 40px;
-    margin-left: 8px;
 }
 
 /* Number of items in Cart */
-.right-nav p {
+.left-nav p {
     padding: 3px 7px;
     margin: -5px 0;
     border-radius: 80px;
     height: 25px;
     width: 25px;
+    background: #000;
+    color: #fff;
+}
+
+/* mobile navbar */
+.mob-ul {
+    display: none;
+    text-align: center;
+}
+
+.mob-nav-active {
+    display: grid;
+}
+
+.mob-ul li {
+    padding: 20px 0;
+    border-bottom: 1px solid #000;
+    width: 100%;
+}
+
+.mob-navbar button {
+    margin: 20px auto;
+}
+
+.mob-navbar img {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+.mob-navbar p {
+    padding: 3px 7px;
+    margin: -5px 0;
+    border-radius: 80px;
+    height: 25px;
+    width: 25px;
+    background: #000;
+    color: #fff;
+}
+
+.mob-navbar .flex {
+    justify-content: center;
+}
+
+.mob-navbar a:hover { color: rgb(214, 52, 52); }
+
+.mob-navbar button {
+    outline: none;
+    background-color: #FAF9F6;
+    padding: 10px 25px;
+}
+
+.mob-navbar .btn:hover {
     background: #000;
     color: #fff;
 }
@@ -182,9 +273,7 @@ img {
 .dishes .card:hover { transform: translateY(-10px);}
 
 /* ------------------ Menu Page CSS ----------------- */
-.menu .container {
-    padding: 0 ;
-}
+.menu .container { padding: 0; }
 
 .menu-item {
     display: flex;
@@ -197,7 +286,10 @@ img {
 
 .menu-item .flex { align-items: center; }
 
-.menu-item .item-info { padding: 15px;}
+.menu-item .item-info { 
+    padding: 15px;
+    width: 100%;
+}
 
 .menu-item figure i {margin-right: 5px;}
 
@@ -257,7 +349,6 @@ img {
 /* ----------------- Our Vision CSS ------------------ */
 /* Banner Image */
 .main-img img { height: 50em; }
-
 
 /* Our History Section */
 .our-history p { 
