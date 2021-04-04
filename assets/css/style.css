@@ -31,7 +31,7 @@ html,body
 html { scroll-behavior: smooth; }
 
 body {
-    background-color: #faf9f6;
+    background-color: #fff;
     font-family: Verdana, sans-serif;
     line-height: 1.6;
     font-size: 1rem;
@@ -60,6 +60,106 @@ img {
     width: 100%; 
     object-fit: cover;
 }
+
+/* ---------------- Registration System ----------------- */
+.signup-modal {
+    visibility: hidden;
+    position: fixed; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: visible;
+    background-color: rgba(0,0,0,0.8); 
+}
+
+.signup-modal .modal-container  {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    justify-content: center;
+    max-width: 45vh;
+    padding: 20px 40px;
+    font-family: Helvetica, sans-serif;
+    background-color: #ffffff;
+    overflow: visible;
+    box-shadow: rgba(15, 167, 238, 0.76) 0px 22px 70px 4px;
+}
+
+/* ------------------- SignIn modal ---------*/
+.sign-modal {
+    visibility: hidden;
+    position: fixed; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: visible;
+    background-color: rgba(0,0,0,0.8); 
+}
+
+.modal-container  {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    overflow: visible;
+
+    transform: translate(-50%, -50%);
+    display: grid;
+    justify-content: center;
+    max-width: 45vh;
+    padding: 20px 40px;
+    font-family: Helvetica, sans-serif;
+    background-color: #ffffff;
+    box-shadow: rgba(15, 167, 238, 0.76) 0px 22px 70px 4px;
+}
+
+.show { visibility: visible; }
+
+.modal-content {
+    max-width: 240px;
+    text-align: center;
+}
+
+.sign-modal input, .signup-modal input {
+    outline: none;
+    border: 1px solid #222;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.m-content-2 { font-size: 12px; }
+
+.sign-modal .btn , .signup-modal .btn{
+    margin: 0 auto;
+    width: 150px;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #222;
+}
+
+.form-label { font-size: 20px; }
+.sign-modal .modal-icons,.signup-modal .modal-icons {
+    font-size: 30px;
+    margin: 0 auto;
+}
+
+.sign-modal li, .signup-modal li{
+    margin: 0 10px;
+}
+
+.sign-modal .modal-content i, .signup-modal .modal-content i {
+    position: absolute;
+    font-size: 25px;
+    right: 12px;
+    top: 10px;
+    cursor: pointer;
+}
+
 /* ------------- Home Page CSS -------------- */
 /* Navbar */
 .navbar h1 { font-size: 25px; }
@@ -85,7 +185,7 @@ img {
 
 .navbar button {
     outline: none;
-    background-color: #FAF9F6;
+    background-color: #fff;
     padding: 0px 25px;
 }
 
@@ -137,7 +237,7 @@ img {
     color: #fff;
 }
 
-/* mobile navbar */
+/* ---------- mobile navbar ------------ */
 .mob-ul {
     display: none;
     text-align: center;
@@ -181,7 +281,7 @@ img {
 
 .mob-navbar button {
     outline: none;
-    background-color: #FAF9F6;
+    background-color: #ffffff;
     padding: 10px 25px;
 }
 
