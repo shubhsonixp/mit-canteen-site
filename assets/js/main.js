@@ -1,3 +1,4 @@
+// ------------------ Menu.html Menu Cards ------------------------
 menu = {
     "items": [
         {
@@ -262,14 +263,11 @@ menu = {
         }
     ]
 }
-
 const menuSection = document.querySelector('.menu-section');
-
 window.addEventListener('DOMContentLoaded', () =>{
     displayMenuItems(menu)
 })
-
-
+// Function To Create Menu Cards & Add to HTML
 function displayMenuItems(menuItems){
     let displayMenu = menuItems.items.map(function(item){
       return `
@@ -301,3 +299,5 @@ function displayMenuItems(menuItems){
     displayMenu = displayMenu.join('');
     menuSection.innerHTML = displayMenu;
   }
+// ------------------ Menu.html Menu Cards END ------------------------
+
