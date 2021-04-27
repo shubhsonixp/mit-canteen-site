@@ -17,6 +17,12 @@
     flex-wrap: wrap;
 }
 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .grid {
     display: grid;
     gap: 20px;
@@ -30,6 +36,8 @@
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.show { visibility: visible; }
 
 /* Underline (Cool Ones)*/
 .display-table {
@@ -75,9 +83,7 @@ button {cursor: pointer;}
     margin: 0 auto;
 }
 /* Text Decorations */
-.underline {
-    border-bottom: 2px solid #000;
-}
+.underline { border-bottom: 2px solid #000; }
 
 /* Text Sizes */
 .sm { font-size: 1.5rem;}
