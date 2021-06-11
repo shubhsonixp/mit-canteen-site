@@ -32,11 +32,11 @@
       const phoneNumber = myForm["sign-up-number"].value;
 
       // CheckStuff -
-      if (password != repassword){
-        alert("Re Entered password is not same as entered password");
+      if (password != repassword || password === ''){
+        Swal.fire('Re Entered password is not same as entered password or field empty')
       }
       else if (phoneNumber.length != 10){
-        alert("Phone Number is not valid");
+        Swal.fire('Phone Number is not valid')
       }
       else {
         // Firebase Auth
@@ -44,14 +44,14 @@
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((cred) => {
-          alert('Account Created Successfully');
           // Save Data to firebase storage -
           saveDatabase.UserfirebaseDatabase(userName, email, password, phoneNumber);
-          this.authRedirecting()
+          Swal.fire({
+            icon: 'success',
+            title: 'Account Created Successfully. Please LogIn To order Delicious Cuisine',
+          })
         })
-        .catch((error) => {
-          alert("failed, error is => ", error);
-        });
+        .catch((error) => Swal.fire("" + error));
       }
     }
   
@@ -62,15 +62,11 @@
         .auth()
         .signInWithPopup(provider)
         .then((result) => {
-          var credential = result.credential;
-          console.log(result);
-          alert("Signed in with Google Successfully");
-          // this.authRedirecting()
+          console.log(result.email);
+          this.notifyUser();
           this.firebaseAuthRedirect();
         })
-        .catch((error) => {
-          console.log("Google Sign Up Failed", error);
-        });
+        .catch((error) => Swal.fire("" + error));
 
     }
   
@@ -84,79 +80,85 @@
         .signInWithPopup(provider)
         .then((result) => {
           console.log(result);
-          alert("Logeed In with facebook successfully");
-          this.authRedirecting()
+          this.notifyUser();
+          this.firebaseAuthRedirect()
         })
-        .catch((error) => {
-          alert("ohhh no oh noo noo no no", error);
-        });
+        .catch((error) => Swal.fire("" + error));
     }
   
     // GitHub SignUp Method -
     githubSignUpIn(){
       var provider = new firebase.auth.GithubAuthProvider();
       provider.addScope("email, password");
-  
+
       firebase
         .auth()
         .signInWithPopup(provider)
         .then(function (result) {
-          console.log(result);
-          alert("Logeed In with github successfully");
-          this.authRedirecting()
+          this.notifyUser();
+          this.firebaseAuthRedirect()
         })
-        .catch((error) => {
-          alert("Log In with github failed", error);
-        });
+        .catch((error) => Swal.fire("" + error));
     }
 
     static authRedirecting() {
       window.setTimeout(() => {
-        // window.location.replace('http://127.0.0.1:5501/client-side.html');
         window.location.replace('https://mit-canteen.netlify.app/client-side');
-      }, 1000)
+      }, 500)
+    }
+
+    // Notify User
+    notifyUser() {
+      window.setTimeout(function(){
+        Swal.fire({
+          icon: 'success',
+          title: 'Account Created/Signed In Successfully',
+        })
+      },1250)
     }
 
     firebaseAuthRedirect(){
       firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          console.log(user.email);
-          window.location.replace('https://mit-canteen.netlify.app/client-side.html')
-        } else {
-          // No user is signed in.
-          console.log('none');
-        }
+        // If user is registered -
+        user ?  window.location.replace('https://mit-canteen.netlify.app/client-side') : console.log('none');
       });
     }
-
   }
 
-    // Sign In Methods -
-    class signInMethods {
-      builtInSignIn(){
-      const email =  document.getElementById('sign-in-email').value;
-      const password = document.getElementById('sign-in-password').value;
-      console.log('called');
-  
-      firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(userCredential => {
-          alert("Logged In");
-          signUpMethods.authRedirecting()
+  // Sign In Methods -
+  class signInMethods {
+    builtInSignIn(){
+    const email =  document.getElementById('sign-in-email').value;
+    const password = document.getElementById('sign-in-password').value;
+    console.log('called');
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Logged In',
       })
-      .catch(error => {
-          alert("Log In Failed: ", error);
-      });
-      }
+      signUpMethods.authRedirecting()
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: 'error',
+        title: '' + error,
+      })
+    });
     }
+  }
 
   // Save Data - To Firebase
   class saveDatabase {
     // Authentication Details -
     static UserfirebaseDatabase(userName, email, password, phoneNumber) {
+
+      const userID = makeUserDataID(email);
+      
       // Create User data in firebase -
       console.log('database called');
-      firebase.database().ref('User_Data/' + userName).set({
+      firebase.database().ref('User_Data/' + userID).set({
         User_Name: userName,
         Email: email,
         Password: password,
@@ -225,28 +227,24 @@
     if (logout){
       logout.addEventListener('click', (e) => {
         e.preventDefault();
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged Out Successfully',
+        })
         firebase.auth().signOut().then(() => {
-          console.log('You have logged out successfully');
-          alert('You have logged out successfully');
-          // window.location.replace("http://127.0.0.1:5501/index.html")
           window.location.replace("https://mit-canteen.netlify.app/index.html")
         });
       });
     }
-    
   });
 
-  // To know if user have logged in -
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      console.log(user.email);
-    } else {
-      // No user is signed in.
-      console.log('none');
-    }
-  });
-
-  // --- Cart Functioning ---
-
-  
+// Makes User ID Through EmailID Provided By User
+let userDataID = '';
+function makeUserDataID(userEmailID){
+  // let userDataID = '';
+  for (i=0; userEmailID.length; i++){
+    if (userEmailID[i] != '@') { userDataID = userDataID + userEmailID[i] }
+    else { break }
+  }
+  return userDataID
+}

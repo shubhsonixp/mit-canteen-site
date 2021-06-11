@@ -64,68 +64,33 @@
         </nav>
     </header>
 
-    <!-- Product Management -->
-    <section class="product-management">
+    <section class="add-product remove">
         <div class="container-min grid">
-            <div class="title md text-center">Product Management</div>
-            <hr>
-            <article class="choose-operation text-center">
-                <button class="btn p-1" id="add-product-menu">Add a Product to Menu</button>
-                <button class="btn p-1" id="remove-product-menu">Remove a Product from Menu</button>
-            </article>
-        </div>
-    </section>
-
-    <section class="add-product add-container">
-        <div class="container-min grid">
-            <div class="title md text-center">Add Product in Menu</div>
+            <div class="title md text-center">ravindra@gmail.com Orders</div>
             <hr>
             <!-- Add Menu Item -->
-            <article class="menu-item text-center">
-                <img src="assets/images/sandwich1.jpg" alt="Product image">
-                
-                <div class="item-info">
-                    <figure>
-                        
-                        <div class="flex align-item-center">
-                            <input id="add-title" type="text" placeholder="Title of Food">
-                            <input id="add-calories" type="text" placeholder="For Eg. 220 - 280 Kcal">
-                            <input id="add-price" type="text" placeholder="Price" id="product-price">
-                        </div>
-                    </figure>
-                    <div class="item-category my-1">
-                        <select name="Categories" id="add-category">
-                            <option value="Burger">Burger</option>
-                            <option value="Maggie">Maggie</option>
-                            <option value="Fries">Fries</option>
-                            <option value="Beverages">Beverages</option>
-                            <option value="Pasta">Pasta</option>
-                        </select>
-                    </div>
-                    <div class="my-1 text-center">
-                        <button class="btn">Add to Menu</button>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <section class="add-product remove remove-container">
-        <div class="container-min grid">
-            <div class="title md text-center">Remove a Product from Menu</div>
-            <hr>
-            <!-- Add Menu Item -->
-            <article class="menu-item text-center">
-                <img src="assets/images/sandwich1.jpg" alt="Product image">
-                
-                <div class="item-info">
-                    <figure>
-                        <h2><input type="text" placeholder="Title of Food"></h2>
-                    </figure>
-                    <div class="my-1 text-center">
-                        <button class="btn">Remove From Menu</button>
-                    </div>
-                </div>
+            <article class="menu-item text-center grid grid-1">
+                <table>
+                    <tr>
+                      <th>S.No.</th>
+                      <th>Food Item</th>
+                      <th>Amount</th>
+                      <th>Total</th>
+                    </tr>
+                    <tr>
+                      <td>1.</td>
+                      <td>Double Cheese Potato Burger</td>
+                      <td>2</td>
+                      <td>90.00</td>
+                    </tr>
+                    <tr>
+                      <td>2.</td>
+                      <td>Veg Club Sandwitch</td>
+                      <td>1</td>
+                      <td>120.00</td>
+                    </tr>
+                </table>
+                <div class="my-1 bold">Sub-Total: 210.00</div>
             </article>
         </div>
     </section>
@@ -138,6 +103,6 @@
     <script src="assets/js/features.js"></script>
     <!-- Controls User Stuff -->
     <script src="assets/js/functioning.js"></script>
-
+    
 </body>
 </html>

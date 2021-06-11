@@ -22,49 +22,16 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
 
+    <!-- Sweet Alert Pop Modal -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
     <!-- NavBar -->
-    <header class="navbar">
-        <div class="container flex text-center jc-ai-center">
-            <!-- Left Navigation -->
-            <div class="site-title flex align-item-center">
-                <div>
-                    <a href="index.html"><h1><span class="clr-red">Mit</span> <span class="clr-green">Canteen</span></h1></a>
-                </div>
-                <!-- Toggle Bars -->
-                <div class="toggle-bars mybar">
-                    <div class="bars bar-1"></div>
-                    <div class="bars bar-2"></div>
-                    <div class="bars bar-3"></div>
-                </div>
-            </div>
-            <!-- Right Navigation -->
-            <nav class="site-nav flex left-nav align-item-center">                
-                <ul class="flex">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="our-vision.html">Our Vision</a></li>
-                    <button  class="btn" id="sign-modal">Log In</button>
-                    <button  class="btn" id="signup-modal">Sign Up</button>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <header class="navbar" id="preview-navbar"><!-- Comes From Js File --></header>
 
     <!-- Mobile Navbar -->
-    <header class="mob-navbar">
-        <nav class="nav container">
-            <ul class="mob-ul">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="our-vision.html">Our Vision</a></li>
-                <button class="btn" id="sign-modal">Log In</button>
-                <button class="btn" id="signup-modal">Sign Up</button>
-            </ul>
-        </nav>
-    </header>
+    <header class="mob-navbar" id="mob-preview-navbar"><!-- Comes through JS --></header>
 
     <!-- Modal SignUp -->
     <section class="signup-modal"><!-- Comes through JS --></section>
@@ -73,7 +40,11 @@
     <section class="sign-modal"><!-- Comes through JS --></section>
 
     <!-- Main Image -->
-    <section class="main-img"><img src="assets/images/8690.jpg" alt="showcase"></section>
+    <section class="main-img">
+        <div class="banner">
+            <h1 class="banner-title lg">Our Vision</h1>
+        </div>
+    </section>
 
     <!-- Our History Section -->
     <section class="our-history m-2">
@@ -182,7 +153,7 @@
             <!-- Content -->
             <article class="grid grid-2 md align-item-center">
                 <div class="m-3" id="history-content">
-                    <div ><h4 class="display-table"><span class="clr-red">MIT </span><span class="clr-green"> Pocket Friendly Cafe</span></h4></div>
+                    <div ><h4 class="display-table"><span class="clr-red sm">MIT </span><span class="clr-green sm"> Pocket Friendly Cafe</span></h4></div>
                     <p>Malwa Institute of Technology is committed to provide value
                         based quality technical education and facilitis to the students 
                         to boost there performance. Always continue the climb. It is 
@@ -198,16 +169,14 @@
     </section>
 
     <!-- Customers Footer -->
-    <footer id="customer-footer"><!-- Comes Through JS --></footer>
+    <footer class="customer-footer"><!-- Comes Through JS --></footer>
 
-    <!-- Page Animations -->
-    <script src="assets/js/animations.js"></script>
-    <!-- Menu & Admin Stuff -->
-    <script src="assets/js/main.js"></script>
     <!-- Creative Features -->
     <script src="assets/js/features.js"></script>
     <!-- Controls User Stuff -->
     <script src="assets/js/functioning.js"></script>
+    <!-- Page Animations -->
+    <script src="assets/js/animations.js"></script>
     
 </body>
 </html>
