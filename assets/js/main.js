@@ -331,44 +331,6 @@ function displayMenuItems(menuItems){
 
 // ------------------ Menu.html Menu Cards END ------------------------
 
-// --- Product functioning ---
-class Products {
-// Add Products To Admin Pannel -
-AdminAddProduct() { /* To Admin Database */ }
-
-// Add Products To Admin Pannel -
-AdminRemoveProduct() { /* To Admin Database */ }
-
-// Add Update Product To Admin Pannel -
-AdminUpdateProduct() { /* To Admin Database */ }
-
-// Get products and display them to customer menu panel -
-getProducts() { }
-
-}
-  
-// Local Storage
-class Storage {
-    static saveProducts(products){
-          localStorage.setItem('products', JSON.stringify(products));
-    }
-
-    static getProduct(id) {
-        // goes into Browser -> Application -> localStorage -> method(getItem(stuff here it is array)) -> 
-        let products = JSON.parse(localStorage.getItem('products')); 
-        return products.find(product => product.id === id)
-    }
-
-    static saveCart(cart){
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    static getCart(){
-        return localStorage.getItem('cart')?JSON.parse
-        (localStorage.getItem('cart')):[]
-    }
-}
-
 // ---------------- Cart Functioning ----------------
 // Inside Cart Container
 const cartItemsContainer = document.querySelector('.cart-items-container');
@@ -384,7 +346,7 @@ const clearCart = document.querySelector('.clear-cart');
 const checkOutBtn = document.querySelector('.check-out');
 
 // Nav Cart btn Values
-const cartValues = document.querySelector('#cart-values');
+const cartValues = document.querySelectorAll('#cart-values');
 
 // Item Quantity -
 var quantity = 1;
@@ -455,7 +417,7 @@ function showUserCart(addItem, trimedEmailID){
     .update({Details: addItem, Total_Amount: totalAmount})
     // UI
     cartTotal.innerHTML = totalAmount;
-    cartValues.innerHTML = No_of_Item;
+    cartValues.forEach(values=>{values.innerHTML = No_of_Item;})
 
     // If user orders than send cart to orders
     userCart = { Details: addItem, Total_Amount: totalAmount }
@@ -482,8 +444,9 @@ function cartFunctionalities (addItem, trimedEmailID, addToCartBtn){
                     }
                     if (addItem.length === 0){
                         cartItemsContainer.innerHTML = '';
-                        cartValues.innerHTML = '0';
-
+                        cartValues.forEach(values => { values.innerHTML = '0';})
+                        cartTotal.innerHTML = '0';
+                        
                         // Remove in Firebase DB
                         firebase
                         .database()
@@ -496,7 +459,7 @@ function cartFunctionalities (addItem, trimedEmailID, addToCartBtn){
             // If last element in cart if removed - 
             if (addItem.length === 0){ 
                 cartItemsContainer.innerHTML = '';
-                cartValues.innerHTML = 0; 
+                cartValues.forEach(values => { values.innerHTML = '0';})
             }
             
             // Remove (i.e update) In Firebase DB
@@ -531,7 +494,7 @@ function cartFunctionalities (addItem, trimedEmailID, addToCartBtn){
                 if (item.FoodID === id && item.Quantity >= 1){
                     item.Quantity -= 1;
                     if (item.Quantity === 0){
-                        if ( window.location != 'http://127.0.0.1:5502/user-orders.html'){
+                        if ( window.location != 'https://mit-canteen.netlify.app/user-orders.html'){
                             // Enable Buttons - so user can use them again
                             // Enable removed items btn
                             addToCartBtn[item.FoodID-1].disabled = false;
@@ -541,8 +504,8 @@ function cartFunctionalities (addItem, trimedEmailID, addToCartBtn){
                         addItem.splice(addItem.indexOf(item) ,1);
                         if (addItem.length === 0){
                             cartItemsContainer.innerHTML = '';
-                            cartValues.innerHTML = '0';
-
+                            cartValues.forEach(values => { values.innerHTML = '0';})
+                            cartTotal.innerHTML = '0';
                             // Remove in Firebase DB
                             firebase
                             .database()
@@ -565,9 +528,9 @@ function cartFunctionalities (addItem, trimedEmailID, addToCartBtn){
 // Remove all items in cart
 function clearUserCart(addItem, addToCartBtn, trimedEmailID){
     cartItemsContainer.innerHTML = '';
-    cartValues.innerHTML = 0;
-   
-    if ( window.location != 'http://127.0.0.1:5502/user-orders.html'){
+    cartValues.forEach(values => { values.innerHTML = '0';})
+    cartTotal.innerHTML = '0';
+    if ( window.location != 'https://mit-canteen.netlify.app/user-orders.html'){
         // Enable removed items btn
         addItem.forEach(item=>{
             addToCartBtn[item.FoodID-1].disabled = false;
@@ -590,12 +553,11 @@ function userOrderManagement (trimedEmailID , userCart, userEmailID){
 
     const orderDate = new Date().toLocaleDateString();
     var orderTime = new Date().toLocaleTimeString();
-
-    if ( orderTime > 12){
-        orderTime = orderTime + ' PM'
-    } else {
-        orderTime = orderTime + ' AM'
-    }
+    // To check AM or PM
+    var hours = new Date().getHours();
+    // Check AM or PM
+    if ( hours >= 12){ orderTime = orderTime + ' PM' }
+    else { orderTime = orderTime + ' AM' }
     
     // Current Order
     let current_order = {
@@ -614,7 +576,6 @@ function userOrderManagement (trimedEmailID , userCart, userEmailID){
     .push(current_order);
 }
 
-
 // Main.js When Content Loaded
 document.addEventListener('DOMContentLoaded', () =>{
     // Client UI
@@ -623,7 +584,6 @@ document.addEventListener('DOMContentLoaded', () =>{
     const addToCartBtn = document.querySelectorAll('#add-to-cart-btn');
     // Menu Filtering items
     filtering(addToCartBtn)
-
     ClientDataFlow(addToCartBtn)
 });
 
@@ -648,7 +608,7 @@ function ClientDataFlow(addToCartBtn){
                         // Store previouly added items to array -
                         addItem.push(userCart[i])
                         // Disable already added items
-                        if (window.location != 'http://127.0.0.1:5502/user-orders.html'){
+                        if (window.location != 'https://mit-canteen.netlify.app/user-orders.html'){
                             addToCartBtn[userCart[i].FoodID-1].disabled = true;
                             addToCartBtn[userCart[i].FoodID-1].innerHTML = 'In Cart';
                         }
@@ -659,14 +619,16 @@ function ClientDataFlow(addToCartBtn){
             })
             
             // Cart Buttons -
-            addToCartBtn.forEach(btn => {
-                btn.addEventListener('click', ()=> {
-                    var quantity = 1;
-                    const data_id = btn.dataset.id;
-                    // Set Values In Firebase DB
-                    foodItemCartBtn(data_id, quantity, trimedEmailID, addItem);
+            if (addToCartBtn){
+                addToCartBtn.forEach(btn => {
+                    btn.addEventListener('click', ()=> {
+                        var quantity = 1;
+                        const data_id = btn.dataset.id;
+                        // Set Values In Firebase DB
+                        foodItemCartBtn(data_id, quantity, trimedEmailID, addItem);
+                    });
                 });
-            });
+            }
 
             // Remove all items from Cart -
             clearCart.addEventListener('click', ()=>{
@@ -681,7 +643,6 @@ function ClientDataFlow(addToCartBtn){
                     // Order
                     let userCart = showUserCart(addItem, trimedEmailID);
                     userOrderManagement(trimedEmailID, userCart, userEmailID);
-                    setOrderDetails()
                     // Empty User Cart
                     cartItemsContainer.innerHTML = '';
                     clearUserCart(addItem, addToCartBtn, trimedEmailID);
@@ -691,7 +652,7 @@ function ClientDataFlow(addToCartBtn){
                         title: 'Order Successfully Recorded',
                     });
                     window.setTimeout(function(){
-                        window.location.replace('http://127.0.0.1:5502/user-orders.html')
+                        window.location.replace('https://mit-canteen.netlify.app/user-orders.html')
                     }, 2600)
                 } else {
                     Swal.fire({
@@ -701,9 +662,10 @@ function ClientDataFlow(addToCartBtn){
                 }
             })
 
-            // Sets Current & Previous Orders Details
-            setOrderDetails(trimedEmailID)
-
+            // Shows Orders
+            if (window.location.href === 'https://mit-canteen.netlify.app/user-orders.html'){
+                setOrderDetails(trimedEmailID)
+            }
         } else {
         console.log('no user logged in');
         }

@@ -67,7 +67,6 @@
           this.firebaseAuthRedirect();
         })
         .catch((error) => Swal.fire("" + error));
-
     }
   
     // FaceBook SignUp Method -
@@ -79,9 +78,8 @@
         .auth()
         .signInWithPopup(provider)
         .then((result) => {
-          console.log(result);
           this.notifyUser();
-          this.firebaseAuthRedirect()
+          this.firebaseAuthRedirect();
         })
         .catch((error) => Swal.fire("" + error));
     }
@@ -94,9 +92,9 @@
       firebase
         .auth()
         .signInWithPopup(provider)
-        .then(function (result) {
+        .then((result) => {
           this.notifyUser();
-          this.firebaseAuthRedirect()
+          this.firebaseAuthRedirect();
         })
         .catch((error) => Swal.fire("" + error));
     }
@@ -112,7 +110,7 @@
       window.setTimeout(function(){
         Swal.fire({
           icon: 'success',
-          title: 'Account Created/Signed In Successfully',
+          title: 'Account Signed In Successfully',
         })
       },1250)
     }
@@ -153,9 +151,7 @@
   class saveDatabase {
     // Authentication Details -
     static UserfirebaseDatabase(userName, email, password, phoneNumber) {
-
-      const userID = makeUserDataID(email);
-      
+      const userID = makeUserDataID(email);     
       // Create User data in firebase -
       console.log('database called');
       firebase.database().ref('User_Data/' + userID).set({
@@ -223,19 +219,22 @@
     }
 
     // LogOut User -
-    const logout = document.getElementById('userlogout');
+    const logout = document.querySelectorAll('#userlogout');
     if (logout){
-      logout.addEventListener('click', (e) => {
-        e.preventDefault();
-        Swal.fire({
-          icon: 'success',
-          title: 'Logged Out Successfully',
-        })
-        firebase.auth().signOut().then(() => {
-          window.location.replace("https://mit-canteen.netlify.app/index.html")
+      logout.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          Swal.fire({
+            icon: 'success',
+            title: 'Logged Out Successfully',
+          })
+          firebase.auth().signOut().then(() => {
+            window.location.replace("https://mit-canteen.netlify.app/index.html")
+          });
         });
-      });
+      })
     }
+
   });
 
 // Makes User ID Through EmailID Provided By User
